@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title> WeatherPoint | A Weather App </title>
+    <!-- Metadata -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Weather Point provides you with real time current, hourly and daily weather information with an interactive map to view the location.">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Exo+2&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=BioRhyme&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Oxygen&display=swap" rel="stylesheet">
+    <!-- Google Material Icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <!-- Bootstrap CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js" integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js" integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc" crossorigin="anonymous"></script>    
+    <!-- Leaflet CDN -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
+    <!-- Esri Leaflet CDN -->
+    <script src="https://unpkg.com/esri-leaflet@3.0.2/dist/esri-leaflet.js" integrity="sha512-myckXhaJsP7Q7MZva03Tfme/MSF5a6HC2xryjAM4FxPLHGqlh5VALCbywHnzs2uPoF/4G/QVXyYDDSkp5nPfig==" crossorigin=""></script>
+    <!-- Esri Leaflet Geocoder CDN -->
+    <link rel="stylesheet" href="https://unpkg.com/esri-leaflet-geocoder@3.0.0/dist/esri-leaflet-geocoder.css" integrity="sha512-IM3Hs+feyi40yZhDH6kV8vQMg4Fh20s9OzInIIAc4nx7aMYMfo+IenRUekoYsHZqGkREUgx0VvlEsgm7nCDW9g==" crossorigin="">
+    <script src="https://unpkg.com/esri-leaflet-geocoder@3.0.0/dist/esri-leaflet-geocoder.js" integrity="sha512-vZbMwAf1/rpBExyV27ey3zAEwxelsO4Nf+mfT7s6VTJPUbYmD2KSuTRXTxOFhIYqhajaBU+X5PuFK1QJ1U9Myg==" crossorigin=""></script>
+    <link rel="icon" type="image/svg+xml" href="assets/WeatherPointLogo.svg"/>
+    <!-- Custom CSS File-->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Loader Part -->
+    <div class="loader-content d-flex justify-content-center align-items-center flex-column">
+        <?xml version="1.0" encoding="UTF-8"?>
+        <svg id="loader-logo" version="1.1" viewBox="0 0 257.37 268.16" xmlns="http://www.w3.org/2000/svg">
+            <g transform="translate(464.33 140.22)">
+                <g>
+                    <path d="m-219.53 60.903c-16.76 29.029-82.597 67.04-116.12 67.04-33.52 0-99.357-38.011-116.12-67.04s-16.76-105.05 0-134.08c16.76-29.029 82.597-67.04 116.12-67.04 33.52 0 99.357 38.011 116.12 67.04 16.76 29.029 16.76 105.05 0 134.08z" fill-rule="evenodd" opacity=".75"/>
+                    <g transform="matrix(1.0672 0 0 1.0672 26.783 -.78954)" fill="#ffdf6c" stroke-width=".93705">
+                        <g transform="matrix(1.938 0 0 2.2952 2157.5 -462.89)" aria-label="W">
+                            <path d="m-1319.7 200.34-6.2751 19.222h-7.5962l-4.0293-33.258q-1.5523-0.19816-2.3449-1.0569-0.7927-0.89173-0.7927-2.2458 0-1.5853 1.0238-2.5431 1.0569-0.95779 3.5009-0.95779l9.0164 0.033q2.444 0 3.4678 0.92476 1.0569 0.92475 1.0569 2.444 0 1.5192-1.0569 2.477-1.0238 0.92476-3.4678 0.92476h-3.5339l2.2458 18.925 5.3174-15.754h7.0348l5.2843 15.754 2.2458-18.925h-3.5339q-2.444 0-3.5008-0.92476-1.0239-0.95779-1.0239-2.477 0-1.5192 1.0239-2.444 1.0568-0.95779 3.5008-0.95779l8.9834 0.033q2.444 0 3.4679 0.92476 1.0568 0.92475 1.0568 2.444 0 1.288-0.8257 2.2128-0.8256 0.92476-2.3779 1.189l-3.8972 33.258h-7.4641z" fill="#ffdf6c" stroke-width=".11755"/>
+                        </g>
+                        <g transform="matrix(3.8398 0 0 4.3028 3935.2 -2399.2)" aria-label="P">
+                            <path d="m-1111.3 559.75v3.7172h3.6467q1.3037 0 1.8498 0.51089 0.5638 0.49327 0.5638 1.3036 0 0.79277-0.5638 1.3037-0.5461 0.49327-1.8498 0.49327h-7.8219q-1.3037 0-1.8674-0.49327-0.5461-0.51089-0.5461-1.3213 0-0.79277 0.5637-1.286 0.5638-0.51089 1.8498-0.51089h0.5637v-14.129h-0.5637q-1.3037 0-1.8674-0.49328-0.5461-0.51089-0.5461-1.3213t0.5461-1.3037q0.5637-0.51089 1.8674-0.51089l8.3152 0.0176q3.6643 0 5.796 2.0083 2.1493 1.9907 2.1493 4.8623 0 1.5855-0.7223 2.9949-0.5462 1.057-1.8322 2.0964-1.2684 1.0218-2.6073 1.5503-1.3213 0.5109-3.5058 0.5109zm0-3.6115h3.3472q2.3607 0 3.7348-1.057 1.3918-1.0746 1.3918-2.5721 0-1.2684-1.1275-2.2197-1.1099-0.95131-3.1887-0.95131h-4.1576z" fill="#ffdf6c" stroke-width=".060995"/>
+                        </g>
+                        <g transform="matrix(.28693 0 0 .33084 -242.4 15.392)">
+                            <path d="m-101.45-24.687h37.02c10.285 0 18.564 8.2796 18.564 18.564v32.178c0 10.285-8.2796 18.564-18.564 18.564h-37.02c-10.285 0-18.564-8.2796-18.564-18.564v-32.178c0-10.285 8.2797-18.564 18.564-18.564z" fill="#ffdf6c" fill-rule="evenodd" style="paint-order:fill markers stroke"/>
+                        </g>
+                        <g transform="matrix(.20723 0 0 .23894 -226.62 -7.2221)">
+                            <path d="m-112.09-14.844h37.02c10.285 0 18.564 8.2796 18.564 18.564v32.178c0 10.285-8.2796 18.564-18.564 18.564h-37.02c-10.285 0-18.564-8.2796-18.564-18.564v-32.178c0-10.285 8.2796-18.564 18.564-18.564z" fill="#ffdf6c" fill-rule="evenodd" style="paint-order:fill markers stroke"/>
+                        </g>
+                        <g transform="matrix(.23911 0 0 .2757 -245.57 -27.47)">
+                            <path d="m-106.99-19.569h37.02c10.285 0 18.564 8.2796 18.564 18.564v32.178c0 10.285-8.2796 18.564-18.564 18.564h-37.02c-10.285 0-18.564-8.2796-18.564-18.564v-32.178c0-10.285 8.2796-18.564 18.564-18.564z" fill="#ffdf6c" fill-rule="evenodd" style="paint-order:fill markers stroke"/>
+                        </g>
+                        <g transform="matrix(.12753 0 0 .14704 -233.98 -45.918)">
+                            <path d="m-136.03 7.3022h37.02c10.285 0 18.564 8.2796 18.564 18.564v32.178c0 10.285-8.2796 18.564-18.564 18.564h-37.02c-10.285 0-18.564-8.2796-18.564-18.564v-32.178c0-10.285 8.2796-18.564 18.564-18.564z" fill="#ffdf6c" fill-rule="evenodd" style="paint-order:fill markers stroke"/>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </svg>
+        <div class="loader"> </div>
+    </div>
+    <!-- Main Page -->
+    <div class="main-content">
+        <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+            <span class="navbar-brand ms-md-3 me-md-5"> <div><span>W</span><span>eather</span><span>P</span><span>oint </span></div> </span>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav nav me-auto mb-2 mb-lg-0" id="myTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <span class="nav-link active px-3" id="home-tab" data-bs-toggle="tab" type="button" data-bs-target="#home"  role="tab" aria-controls="home" aria-selected="true" onclick="toggleNav();">Home</span>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link px-3"  id="weather-tab" data-bs-toggle="tab" type="button" data-bs-target="#weather" role="tab" aria-controls="weather" aria-selected="false" onclick="toggleNav();">Know Your Weather</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link px-3" id="clock-tab" data-bs-toggle="tab" type="button" data-bs-target="#clock" role="tab" aria-controls="clock" aria-selected="false" onclick="toggleNav();">World Clock</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link px-3"  id="zones-tab" data-bs-toggle="tab" type="button" data-bs-target="#zones" type="button" role="tab" aria-controls="zones" aria-selected="false" onclick="toggleNav();">Time Zones</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- Tab Contents -->
+    <div class="tab-content" id="myTabContent">
+        <!-- Home Page -->
+        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+            <div class="row m-0 first-part">
+                <div class="col-11 offset-md-0 col-sm-6 col-md-6 d-flex justify-content-center align-items-center align-items-md-start flex-column mt-4 mt-md-0 mx-3 mx-1 mx-md-0 ms-md-5 mx-sm-5 px-0 px-md-4">
+                    <span class="logo-brand"> <div><span>W</span><span>eather</span><span>P</span><span>oint </span></div> </span>
+                    <hr class="hr2" />
+                    <h3 class="text-center text-md-start mr-3 mb-2 h3"> Simple, Smart and User-freindly web application for finding weather </h3>
+                    <p class="text-center text-md-start mr-3"> Find The Current Weather, Time, Air Quality, Sun, Moon and much more ... </p>
+                </div>
+                <div class="col-12 col-sm-6 col-md-5">
+                    <div class="main-page-svg-container d-flex justify-content-center align-items-center">
+                        <div class="main-page-svg"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="row m-0 second-part d-flex justify-content-center align-items-center text-center">
+                <h3> This Weather Checking App is easy to use and will help you evaluate the effects of temperature, rain, wind and humidity </h3>
+            </div>
+            <div class="row m-0 third-part">
+                <h3 class="m-0 my-3 p-0 d-flex justify-content-center align-items-center"> Features Provided </h3>
+                <div class="d-flex justify-content-center">
+                    <hr class="hr3" />
+                </div>
+                <div class="col-12 col-md-4">
+                    <div class="card mx-3 mx-md-3 my-3 shadow-sm">
+                        <div class="card-img-top d-flex justify-content-center align-items-center bg-dark py-5"> 
+                            <i class="material-icons mask-icon"> masks </i>
+                        </div>
+                        <h4 class="card-title text-center pt-1"> Air Quality </h4>
+                        <div class="card-body text-center pb-3"> Gives the report of the Air Quality and how much it impacts your health </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-4">
+                    <div class="card mx-3 mx-md-3 my-3 shadow-sm">
+                        <div class="card-img-top d-flex justify-content-center align-items-center bg-dark py-5"> 
+                            <i class="material-icons mask-icon"> place </i>
+                        </div>
+                        <h4 class="card-title text-center pt-1"> Location </h4>
+                        <div class="card-body text-center pb-3"> Get all weather related information based on location </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-4">
+                    <div class="card mx-3 mx-sm-3 my-3 mb-5 mb-md-5 shadow-sm">
+                        <div class="card-img-top d-flex justify-content-center align-items-center bg-dark py-5"> 
+                            <i class="material-icons mask-icon"> thermostat </i>
+                        </div>
+                        <h4 class="card-title text-center pt-1"> Up-to-date Info </h4>
+                        <div class="card-body text-center pb-3"> Weather details get updated continuously and up-to-date information is provided </div>
+                    </div>
+                </div>
+            </div>
+            <form class="row m-0 fourth-part">
+                <h3 class="m-0 mt-3 p-0 d-flex justify-content-center align-items-center"> Your Feedback </h3>
+                <div class="d-flex justify-content-center">
+                    <hr class="hr3 hr4" />
+                </div>
+                <div class="mb-3">
+                    <label for="name" class="form-label">Name</label>
+                    <input type="email" class="form-control" id="name" required="required" autocomplete="off">
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email address</label>
+                    <input type="email" class="form-control" id="email" required="required" autocomplete="off">
+                </div>
+                <div class="mb-3">
+                    <label for="message" class="form-label">Your Feedback</label>
+                    <textarea class="form-control" id="message" rows="3"></textarea>
+                </div>
+                <div class="col-8 offset-2 col-md-4 offset-md-4 my-md-2 mb-4">
+                    <button type="submit" class="btn feedback-btn btn-block w-100" tabindex="-1" aria-disabled="true"> Submit </button>
+                </div>
+            </form>
+        </div>
+        <!-- Know Your Weather Page -->
+        <div class="tab-pane fade pt-0 mt-0" id="weather" role="tabpanel" aria-labelledby="weather-tab">
+            <div class="card mx-3 mx-md-5 mb-3 shadow-sm">
+                <!-- Leaflet Map -->
+                <div class="card-img-top map" id="mapid"></div>
+                <!-- Location Input From User -->
+                <div class="card-body">
+                    <div class="row card-title">
+                        <div class="col-12">
+                            <input type="text" class="form-control" id="entered-location" list="locationOption" placeholder="Enter Your Location" />
+                            <datalist id="locationOption">
+                            </datalist>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Current Weather Info -->
+            <div class="row m-0">
+                <div class="col-12 col-md-6">
+                    <div class="card mx-3 ms-md-5">
+                        <div class="card-body shadow-sm">
+                            <h5 class="card-title text-left"> CURRENT WEATHER </h5>
+                            <div class="row">
+                                <div class="col-6">
+                                    <h5 class="temp-time">6:15 PM</h5>
+                                </div>
+                                <div class="col-6">
+                                    <h5 class="text-end temp-city">MUMBAI</h5>
+                                </div>
+                                <div class="d-flex justify-content-center">
+                                    <hr class="hr1" />
+                                </div>
+                                <div class="col-6">
+                                    <span class="temp">32 </span>&#8451; <br/> <span class="temp-desc">Smoke</span>
+                                </div>
+                                <div class="col-6 text-end">
+                                    <img class="current-weather-icon" src="" />
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+                <!-- Air Quality Data -->
+                <div class="col-12 col-md-6">
+                    <div class="card mt-3 mt-md-0 mx-3 me-md-5">
+                        <div class="card-body shadow-sm">
+                            <h5> CURRENT AIR QUALITY </h5>
+                            <div class="row">
+                                <div class="col-12 col-md-4 d-flex justify-content-center align-items-center">
+                                    <!-- AQI Circular diagram : https://www.accuweather.com/en/in/mumbai/204842/weather-forecast/204842 -->
+                                    <div class="aqi-circle d-flex justify-content-center align-items-center my-md-0 my-5">
+                                        <span class="aqi-value"> 197 </span>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-8 aqi-part d-flex flex-column justify-content-center">
+                                    <h6 class="text-center text-md-start aqi-text"> Poor </h6>
+                                    <p class="text-center text-md-start aqi-description"> The air has reached a high level of pollution and is unhealthy for sensitive groups. Reduce time spent outside if you are feeling symptoms such as difficulty breathing or throat irritation. </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Detailed Current Weather Info -->
+                <div class="col-12 col-md-6">
+                    <div class="card mx-3 ms-md-5 mt-3 mt-md-0">
+                        <div class="card-body shadow-sm">
+                            <h5> WEATHER </h5>
+                            <div class="row">
+                                <div class="col-12 col-md-6">
+                                    <div class="row">
+                                        <div class="col-6 fw-bold">Wind</div>
+                                        <div class="col-6"><span class="wind-speed"></span> m/s</div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 mb-2">
+                                    <div class="row">
+                                        <div class="col-6 fw-bold">Pressure</div>
+                                        <div class="col-6"><span class="pressure"></span> hPa</div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="row">
+                                        <div class="col-6 fw-bold">Humidity</div>
+                                        <div class="col-6"><span class="humidity"></span>%</div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 mb-2">
+                                    <div class="row">
+                                        <div class="col-6 fw-bold">Feels Like</div>
+                                        <div class="col-6"><span class="feels-like"></span> &#8451;</div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="row">
+                                        <div class="col-6 fw-bold">Visibility</div>
+                                        <div class="col-6"><span class="visibility"></span> m</div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 mb-2">
+                                    <div class="row">
+                                        <div class="col-6 fw-bold">Wind Gusts</div>
+                                        <div class="col-6"> <span class="wind-gust"></span> m/s</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Sun Rise and Sun Set Data -->
+                <div class="col-12 col-md-6">
+                    <div class="card mt-3 mt-md-4 mx-3 me-md-5">
+                        <div class="card-body shadow-sm">
+                            <h5> SUNRISE / SUNSET </h5>
+                            <div class="row m-0 mt-3">
+                                <div class="col-12 col-md-12">
+                                    <div class="row">
+                                        <!--<div class="col-4 text-center">
+                                            <i class="material-icons world-clock-icons"> light_mode </i>
+                                        </div>-->
+                                        <div class="col-3 text-center">
+                                            <span class="sun-rise-time"></span> <br/> (Rise)
+                                        </div>
+                                        <div class="col-3 text-center">
+                                            <span class="sun-set-time"></span> <br/> (Set)
+                                        </div>
+                                        <div class="col-3 text-center">
+                                            <span class="day-time"></span> hrs <br/> (Day Time)
+                                        </div>
+                                        <div class="col-3 text-center">
+                                            <span class="night-time"></span> hrs <br/> (Night Time)
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-center mt-4">
+                    <hr class="hr2" />
+                </div>
+                <!-- Hourly Weather Info -->
+                <div class="col-12">
+                    <div class="d-flex justify-content-center align-items-center mt-4 pb-2">
+                        <h3> Hourly Forecast </h3>
+                    </div>
+                    <div class="row mx-0 mx-md-4 mb-3 hourly-forecast">
+                        <div class="col-12 col-md-6 col-lg-3 my-2 mb-2">
+                            <div class="card mx-3">
+                                <div class="card-body shadow-sm">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <h5 class="card-title text-start d-inline hourly-forecast-time"> 19:00 </h5>
+                                        </div>
+                                        <div class="col-6">
+                                            <h5 class="card-title text-end hourly-forecast-date"> 27th May </h5>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-4 pt-3 pe-0">
+                                            <h6> <span class="hourly-forecast-desc"> Cloudy </span> </h6>
+                                        </div>
+                                        <div class="col-4 text-center pt-1 ps-0">
+                                            <img class="hourly-weather-icon" src="" />
+                                        </div>
+                                        <div class="col-4 pt-3 ps-0">
+                                            <h5 class="text-end"> <span class="hourly-forecast-temp">17 </span> &#8451;</h5>
+                                        </div>
+                                        <div class="d-flex justify-content-center">
+                                            <hr class="hr1" />
+                                        </div>
+                                        <div class="col-8">
+                                            <h6> Precipitation </h6>
+                                        </div>
+                                        <div class="col-4 text-end">
+                                            <h6> <span class="hourly-forecast-precipitation"> 81 </span>% </h6>
+                                        </div>
+                                        <div class="col-8">
+                                            <h6> Humidity </h6>
+                                        </div>
+                                        <div class="col-4 text-end">
+                                            <h6> <span class="hourly-forecast-humidity"> 81 </span>% </h6>
+                                        </div>
+                                        <div class="col-8">
+                                            <h6> Felt Like </h6>
+                                        </div>
+                                        <div class="col-4 text-end">
+                                            <h6> <span class="hourly-forecast-felt-like"> 34 </span> &#8451;</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-md-6 col-lg-3 my-2 mb-2">
+                            <div class="card mx-3">
+                                <div class="card-body shadow-sm">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <h5 class="card-title text-start d-inline hourly-forecast-time"> 19:00 </h5>
+                                        </div>
+                                        <div class="col-6">
+                                            <h5 class="card-title text-end hourly-forecast-date"> 27th May </h5>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-4 pt-3 pe-0">
+                                            <h6> <span class="hourly-forecast-desc"> Cloudy </span> </h6>
+                                        </div>
+                                        <div class="col-4 text-center pt-1 ps-0">
+                                            <img class="hourly-weather-icon" src="" />
+                                        </div>
+                                        <div class="col-4 pt-3 ps-0">
+                                            <h5 class="text-end"> <span class="hourly-forecast-temp">17 </span> &#8451; </h5>
+                                        </div>
+                                        <div class="d-flex justify-content-center">
+                                            <hr class="hr1" />
+                                        </div>
+                                        <div class="col-8">
+                                            <h6> Precipitation </h6>
+                                        </div>
+                                        <div class="col-4 text-end">
+                                            <h6> <span class="hourly-forecast-precipitation"> 81 </span>% </h6>
+                                        </div>
+                                        <div class="col-8">
+                                            <h6> Humidity </h6>
+                                        </div>
+                                        <div class="col-4 text-end">
+                                            <h6> <span class="hourly-forecast-humidity"> 81 </span>% </h6>
+                                        </div>
+                                        <div class="col-8">
+                                            <h6> Feels Like </h6>
+                                        </div>
+                                        <div class="col-4 text-end">
+                                            <h6> <span class="hourly-forecast-felt-like"> 34 </span> &#8451; </h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-md-6 col-lg-3 my-2 mb-2">
+                            <div class="card mx-3">
+                                <div class="card-body shadow-sm">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <h5 class="card-title text-start d-inline hourly-forecast-time"> 19:00 </h5>
+                                        </div>
+                                        <div class="col-6">
+                                            <h5 class="card-title text-end hourly-forecast-date"> 27th May </h5>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-4 pt-3 pe-0">
+                                            <h6> <span class="hourly-forecast-desc"> Cloudy </span> </h6>
+                                        </div>
+                                        <div class="col-4 text-center pt-1 ps-0">
+                                            <img class="hourly-weather-icon" src="" />
+                                        </div>
+                                        <div class="col-4 pt-3 ps-0">
+                                            <h5 class="text-end"> <span class="hourly-forecast-temp">17 </span> &#8451; </h5>
+                                        </div>
+                                        <div class="d-flex justify-content-center">
+                                            <hr class="hr1" />
+                                        </div>
+                                        <div class="col-8">
+                                            <h6> Precipitation </h6>
+                                        </div>
+                                        <div class="col-4 text-end">
+                                            <h6> <span class="hourly-forecast-precipitation"> 81 </span>% </h6>
+                                        </div>
+                                        <div class="col-8">
+                                            <h6> Humidity </h6>
+                                        </div>
+                                        <div class="col-4 text-end">
+                                            <h6> <span class="hourly-forecast-humidity"> 81 </span>% </h6>
+                                        </div>
+                                        <div class="col-8">
+                                            <h6> Feels Like </h6>
+                                        </div>
+                                        <div class="col-4 text-end">
+                                            <h6> <span class="hourly-forecast-felt-like"> 34 </span> &#8451; </h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-md-6 col-lg-3 my-2 mb-2">
+                            <div class="card mx-3">
+                                <div class="card-body shadow-sm">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <h5 class="card-title text-start d-inline hourly-forecast-time"> 19:00 </h5>
+                                        </div>
+                                        <div class="col-6">
+                                            <h5 class="card-title text-end hourly-forecast-date"> 27th May </h5>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-4 pt-3 pe-0">
+                                            <h6> <span class="hourly-forecast-desc"> Cloudy </span> </h6>
+                                        </div>
+                                        <div class="col-4 text-center pt-1 ps-0">
+                                            <img class="hourly-weather-icon" src="" />
+                                        </div>
+                                        <div class="col-4 pt-3 ps-0">
+                                            <h5 class="text-end"> <span class="hourly-forecast-temp">17 </span> &#8451; </h5>
+                                        </div>
+                                        <div class="d-flex justify-content-center">
+                                            <hr class="hr1" />
+                                        </div>
+                                        <div class="col-8">
+                                            <h6> Precipitation </h6>
+                                        </div>
+                                        <div class="col-4 text-end">
+                                            <h6> <span class="hourly-forecast-precipitation"> 81 </span>% </h6>
+                                        </div>
+                                        <div class="col-8">
+                                            <h6> Humidity </h6>
+                                        </div>
+                                        <div class="col-4 text-end">
+                                            <h6> <span class="hourly-forecast-humidity"> 81 </span>% </h6>
+                                        </div>
+                                        <div class="col-8">
+                                            <h6> Feels Like </h6>
+                                        </div>
+                                        <div class="col-4 text-end">
+                                            <h6> <span class="hourly-forecast-felt-like"> 34 </span> &#8451; </h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-center mt-4">
+                    <hr class="hr2" />
+                </div>
+                <!-- Daily Weather Info -->
+                <div class="col-12">
+                    <div class="d-flex justify-content-center align-items-center mt-4 pb-2">
+                        <h3> Daily Forecast </h3>
+                    </div>
+                    <div class="row mx-0 mx-md-4 mb-3 daily-forecast">
+                        <div class="col-12 col-lg-6 my-2 mb-2">
+                            <div class="card mx-3">
+                                <div class="card-body shadow-sm">
+                                    <div class="row">
+                                        <div class="col-4 col-md-2">
+                                            <h5 class="card-title text-center daily-forecast-day"> TUE </h5>
+                                            <h5 class="card-title text-center daily-forecast-date"> 25/5 </h5>
+                                        </div>
+                                        <div class="col-4 col-md-2 d-flex align-items-center">
+                                            <img class="daily-weather-icon" src="" />
+                                        </div>
+                                        <div class="col-4 col-md-3 d-flex align-items-center justify-content-center">
+                                            <h5 class="daily-forecast-desc"> Cloudy </h5>
+                                        </div>
+                                        <div class="col-6 col-md-3 d-flex align-items-center justify-content-center pt-3 pt-md-auto">
+                                            <h4 class="d-inline text-center daily-forecast-max"> 37 </h4><h4>&#8451;/</h4><h6 class="d-inline daily-forecast-min">32</h6><h6>&#8451;</h6>
+                                        </div>
+                                        <div class="col-6 col-md-2 d-flex align-items-center justify-content-center">
+                                            <span class="material-icons"> water_drop </span> <span class="daily-forecast-precipitation">41</span>%
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 my-2 mb-2">
+                            <div class="card mx-3">
+                                <div class="card-body shadow-sm">
+                                    <div class="row">
+                                        <div class="col-4 col-md-2">
+                                            <h5 class="card-title text-center daily-forecast-day"> TUE </h5>
+                                            <h5 class="card-title text-center daily-forecast-date"> 25/5 </h5>
+                                        </div>
+                                        <div class="col-4 col-md-2 d-flex align-items-center">
+                                            <img class="daily-weather-icon" src="" />
+                                        </div>
+                                        <div class="col-4 col-md-3 d-flex align-items-center justify-content-center">
+                                            <h5 class="daily-forecast-desc"> Cloudy </h5>
+                                        </div>
+                                        <div class="col-6 col-md-3 d-flex align-items-center justify-content-center pt-3 pt-md-auto">
+                                            <h4 class="d-inline text-center daily-forecast-max"> 37 </h4><h4>&#8451;/</h4><h6 class="d-inline daily-forecast-min">32</h6><h6>&#8451;</h6>
+                                        </div>
+                                        <div class="col-6 col-md-2 d-flex align-items-center justify-content-center">
+                                            <span class="material-icons"> water_drop </span> <span class="daily-forecast-precipitation">41</span>%
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 my-2 mb-2">
+                            <div class="card mx-3">
+                                <div class="card-body shadow-sm">
+                                    <div class="row">
+                                        <div class="col-4 col-md-2">
+                                            <h5 class="card-title text-center daily-forecast-day"> TUE </h5>
+                                            <h5 class="card-title text-center daily-forecast-date"> 25/5 </h5>
+                                        </div>
+                                        <div class="col-4 col-md-2 d-flex align-items-center">
+                                            <img class="daily-weather-icon" src="" />
+                                        </div>
+                                        <div class="col-4 col-md-3 d-flex align-items-center justify-content-center">
+                                            <h5 class="daily-forecast-desc"> Cloudy </h5>
+                                        </div>
+                                        <div class="col-6 col-md-3 d-flex align-items-center justify-content-center pt-3 pt-md-auto">
+                                            <h4 class="d-inline text-center daily-forecast-max"> 37 </h4><h4>&#8451;/</h4><h6 class="d-inline daily-forecast-min">32</h6><h6>&#8451;</h6>
+                                        </div>
+                                        <div class="col-6 col-md-2 d-flex align-items-center justify-content-center">
+                                            <span class="material-icons"> water_drop </span> <span class="daily-forecast-precipitation">41</span>%
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 my-2 mb-2">
+                            <div class="card mx-3">
+                                <div class="card-body shadow-sm">
+                                    <div class="row">
+                                        <div class="col-4 col-md-2">
+                                            <h5 class="card-title text-center daily-forecast-day"> TUE </h5>
+                                            <h5 class="card-title text-center daily-forecast-date"> 25/5 </h5>
+                                        </div>
+                                        <div class="col-4 col-md-2 d-flex align-items-center">
+                                            <img class="daily-weather-icon" src="" />
+                                        </div>
+                                        <div class="col-4 col-md-3 d-flex align-items-center justify-content-center">
+                                            <h5 class="daily-forecast-desc"> Cloudy </h5>
+                                        </div>
+                                        <div class="col-6 col-md-3 d-flex align-items-center justify-content-center pt-3 pt-md-auto">
+                                            <h4 class="d-inline text-center daily-forecast-max"> 37 </h4><h4>&#8451;/</h4><h6 class="d-inline daily-forecast-min">32</h6><h6>&#8451;</h6>
+                                        </div>
+                                        <div class="col-6 col-md-2 d-flex align-items-center justify-content-center">
+                                            <span class="material-icons"> water_drop </span> <span class="daily-forecast-precipitation">41</span>%
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- World Clock Page -->
+        <div class="tab-pane fade" id="clock" role="tabpanel" aria-labelledby="clock-tab" style="background-color: #FDF8F5;">
+            <!-- Add a New Clock Card -->
+            <div class="row m-0 world-clock-list" id="clock-container">
+                <div class="col-12 col-md-4 add-new-location-card">
+                    <div class="card mx-3 mx-sm-5 mx-md-3 my-3 mb-5 mb-md-5">
+                        <div class="card-img-top d-flex justify-content-center align-items-center bg-dark py-5" data-bs-toggle="modal" data-bs-target="#addCityClock"> 
+                            <span class="material-icons add-icon"> add_circle </span>
+                        </div>
+                        <h4 class="card-title text-center pt-1"> Add a new location </h4>
+                        <div class="card-body text-center pb-3">
+                            <div class="row">
+                                <div class="col-12 text-center"> Add and compare the time of different places and check the weather forecast for each location </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Popup Dialog Box For Input For Adding New Clock -->
+            <div class="modal fade" id="addCityClock" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Add Cities</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <input class="form-control mb-3 " id="clock-add-location" list="add-clock-location-list" type="text" placeholder="Enter City Names" required="required">
+                            <datalist id="add-clock-location-list">
+                            </datalist>
+                                                        
+                            <button type="submit" class="btn btn-add-clock">Add</button>
+                            <button type="button" class="btn btn-cancel-clock" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Time Zones Page -->
+        <div class="tab-pane fade" id="zones" role="tabpanel" aria-labelledby="zones-tab">
+            <div class="row m-0 first-part">
+                <div class="col-11 offset-md-0 col-md-6 d-flex justify-content-center align-items-center align-items-md-start flex-column mt-4 mt-md-0 mx-3 mx-1 mx-md-0 ms-md-5 mx-sm-5 px-0 px-md-4"> 
+                    <h3> What are Time Zones? </h3>
+                    <hr class="hr2" />
+                    <p class="text-center text-md-start mr-3"> The term time zone can be used to describe several different things, but mostly it refers to the local time of a region or a country. The local time within a time zone is defined by its offset (difference) from Coordinated Universal Time (UTC), the world's time standard. </p>
+                    <div class="mt-4"></div>
+                    <h3> UTC Offset </h3>
+                    <hr class="hr2" />
+                    <p class="text-center text-md-start mr-3"> Every place on Earth is measured in terms of its distance east or west of the prime meridian (0°longitude) in Greenwich, London, United Kingdom. This is also the reference point for Coordinated Universal Time (UTC) with 1 hour per 15 degrees longitude. </p>
+                </div>
+                <div class="col-12 col-md-5 d-flex justify-content-center mb-md-0 mb-5">
+                    <div class="zone-svg-container d-flex justify-content-center align-items-center">
+                        <div class="zone-svg"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- Time Zone Comparision -->
+            <div class="row m-0 px-3 px-md-5 fourth-part">
+                <h3 class="text-center"> Time Zone Comparison </h3>
+                <div class="d-flex justify-content-center">
+                    <hr class="hr3 hr4" />
+                </div>
+                <p class="text-center mb-5"> Here you can compare the date and time of two different locations from different time zones </p>
+                <div class="col-12 col-md-6">
+                    <div class="row">
+                        <div class="col-12 col-md-4 mb-2">
+                            <input type="text" class="form-control" id="time1" placeholder="Time" readonly="readonly">
+                        </div>
+                        <div class="col-12 col-md-4 mb-2">
+                            <input type="text" class="form-control" id="date1" placeholder="Date" readonly="readonly">
+                        </div>
+                        <div class="col-12 col-md-4 mb-2">
+                            <input type="text" class="form-control" id="timezone1" placeholder="Time Zone" readonly="readonly">
+                        </div>
+                    </div>
+                    <div class="col-12 mb-4">
+                        <input type="text" class="form-control" list="timeZoneOptions1" id="location1" placeholder="Location 1">
+                        <datalist id="timeZoneOptions1">
+                        </datalist>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="row">
+                        <div class="col-12 col-md-4 mb-2">
+                            <input type="text" class="form-control" id="time2" placeholder="Time" readonly="readonly">
+                        </div>
+                        <div class="col-12 col-md-4 mb-2">
+                            <input type="text" class="form-control" id="date2" placeholder="Date" readonly="readonly">
+                        </div>
+                        <div class="col-12 col-md-4 mb-2">
+                            <input type="text" class="form-control" id="timezone2" placeholder="Time Zone" readonly="readonly">
+                        </div>
+                    </div>
+                    <div class="col-12 mb-4">
+                        <input type="text" class="form-control" list="timeZoneOptions2" id="location2" placeholder="Location 2">
+                        <datalist id="timeZoneOptions2">
+                        </datalist>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <hr class="hr3 hr4" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer -->
+    <footer class="text-center text-lg-start text-white">
+        <div class="text-center py-3" style="background-color: rgba(0, 0, 0, 0.2);">
+            &copy; All Rights Reserved by <strong>WeatherPoint</strong>
+        </div>
+    </footer>
+    </div>
+    <!-- Moment JS CDNS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.33/moment-timezone.min.js" integrity="sha512-jkvef+BAlqJubZdUhcyvaE84uD9XOoLR3e5GGX7YW7y8ywt0rwcGmTQHoxSMRzrJA3+Jh2T8Uy6f8TLU3WQhpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.33/moment-timezone-with-data.min.js" integrity="sha512-rjmacQUGnwQ4OAAt3MoAmWDQIuswESNZwYcKC8nmdCIxAVkRC/Lk2ta2CWGgCZyS+FfBWPgaO01LvgwU/BX50Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- Config File With API Keys -->
+    <script src="js/config.js"></script>
+    <!-- Custom Script File -->
+    <script src="js/script.js"></script>
+</body>
+</html>
